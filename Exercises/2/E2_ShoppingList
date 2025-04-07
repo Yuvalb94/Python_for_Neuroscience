@@ -1,0 +1,79 @@
+class ShoppingList:
+    """Represents a shopping list."""
+    def __init__(self, vegetables: int = 10, fruit: int = 5, bread: int = 1):
+        """
+        Initialize a ShoppingList instance.
+
+        Parameters
+        ----------
+        vegetables : int
+            Number of vegetable items
+        fruit : int
+            Number of fruit items
+        bread : int
+            Number of bread items
+        """
+        self.vegetables = vegetables
+        self.fruit = fruit
+        self.bread = bread
+
+    def __str__(self) -> str:
+        """
+        Return a string representation of this instance.
+
+        Returns
+        -------
+        str
+            String representation
+        """
+        n_items = self.vegetables + self.fruit + self.bread
+        return f"""
+        Shopping List:
+            Vegetabels: {self.vegetables}
+            Fruits: {self.fruit}
+            Bread: {self.bread}
+            Total items: {n_items}
+        """
+
+    # ----- New method below: ------
+    def __add__(self, other):
+        """
+        Combines two shopping lists and returns the result.
+
+        Notes
+        -----
+        This method returns a new shopping list, meaning it doesn't modify
+        any of the existing instances it was given.
+
+        Parameters
+        ----------
+        other : ShoppingList
+            Another shopping list
+
+        Returns
+        -------
+        ShoppingList
+            Combined shopping list
+        """
+        if isinstance(other, int):
+            return ShoppingList(
+                vegetables=self.vegetables + other,
+                fruit=self.fruit + other,
+                bread=self.bread + other,
+            )  
+        else:
+            if not isinstance(other, ShoppingList):
+                raise TypeError("Can only add another ShoppingList or an int")
+                       
+            return ShoppingList(
+                vegetables=self.vegetables + other.vegetables,
+                fruit=self.fruit + other.fruit,
+                bread=self.bread + other.bread,
+            )   
+    
+
+shopping_list_a = ShoppingList()
+shopping_list_b = ShoppingList()
+print(shopping_list_a)
+shopping_list_c = shopping_list_a + 10
+print(shopping_list_c)
