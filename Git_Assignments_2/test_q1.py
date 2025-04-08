@@ -4,7 +4,6 @@ from pathlib import Path
 OUTPUT_FILE_NAME = "lorem_morse.txt"
 OUTPUT_PATH = Path(__file__).parent / OUTPUT_FILE_NAME
 
-
 def test_file_exists():
     assert OUTPUT_PATH.exists()
 
