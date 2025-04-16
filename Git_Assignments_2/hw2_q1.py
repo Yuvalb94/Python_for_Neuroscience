@@ -44,21 +44,26 @@ def english_to_morse(
     with open(input_file, "r") as f:
         text = f.read()
 
-    # Convert to uppercase and translate to Morse code
-    morse_code = ' '.join(MORSE_CODE[char] for char in text.upper() if char in MORSE_CODE)
+    # Build a mapping dict with the whitespace character mapped to a newline character.
+    morse_mapping = MORSE_CODE.copy()
+    morse_mapping[' '] = '\n'
 
-    # Write the Morse code to the output file
-    with open(output_file, "w") as f:
-        f.write(morse_code)
+    # Create the translation table.
+    translation_table = str.maketrans(morse_mapping)
+
+    # Convert the text to uppercase then translate it using the translation table.
+    morse_text = text.upper().translate(translation_table).strip()
+
+    # Write the result to a new file.
+    with open(output_file, "w") as file:
+        file.write(morse_text)
+
 
 if __name__ == "__main__":
-    os.chdir(Path(__file__).parent)
     input_file = 'lorem.txt'
     with open(input_file, 'r') as file:
         text = file.read()
 
-    # print("Original text:")
-    # print(text)
     output_file = 'lorem_morse.txt'
-    # print("\nMorse code:")
     english_to_morse(input_file, output_file)
+
