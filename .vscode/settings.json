@@ -1,0 +1,4 @@
+{
+    "python.analysis.supportDocstringTemplate": true,
+    "autoDocstring.startOnNewLine": true
+}
